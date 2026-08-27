@@ -10,7 +10,8 @@ This is a **bake-off repo** — multiple independent builder implementations of 
 
 | Folder | Builder | Status |
 |---|---|---|
-| [`Berd-Kimi/`](./Berd-Kimi) | Berd · glm-5.2 (Product Guru) | ✅ Phase 0–2 complete |
+| [`Berd-Kimi/`](./Berd-Kimi) | Berd · glm-5.2 (Product Guru persona) | ✅ Phase 0–2 complete |
+| [`antigravity/`](./antigravity) | Antigravity | ✅ P0–2 (incl. UI serve script) |
 
 > The spec driving these builds is defined by this repo; each builder folder is a self-contained implementation of it. Add new builders as their own subfolders.
 
