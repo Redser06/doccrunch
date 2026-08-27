@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "provider": "elavon",
+    "statementPeriodStart": "2025-07-01",
+    "statementPeriodEnd": "2025-07-31",
+    "merchantId": "1234567890",
+    "merchantName": "Test Cafe Ltd",
+    "currency": "EUR",
+    "generatedAt": "<dynamic>"
+  },
+  "summary": {
+    "totalVolume": 6525.00,
+    "totalCount": 63,
+    "totalInterchange": 17.92,
+    "totalSchemeFees": 6.53,
+    "totalAcquirerFees": 20.70,
+    "totalFees": 45.15,
+    "netSettlement": 6479.85
+  },
+  "lineItems": [
+    {"date":"2025-07-03","cardType":"visa","transactionType":"sale","volume":1250.00,"count":12,"rate":0.20,"interchangeFee":2.50,"schemeFee":1.25,"acquirerFee":3.75,"totalFee":7.50,"netAmount":1242.50},
+    {"date":"2025-07-05","cardType":"mastercard","transactionType":"sale","volume":890.00,"count":8,"rate":0.30,"interchangeFee":2.67,"schemeFee":0.89,"acquirerFee":2.67,"totalFee":6.23,"netAmount":883.77},
+    {"date":"2025-07-08","cardType":"amex","transactionType":"sale","volume":560.00,"count":5,"rate":1.50,"interchangeFee":8.40,"schemeFee":0.56,"acquirerFee":2.80,"totalFee":11.76,"netAmount":548.24},
+    {"date":"2025-07-10","cardType":"visa-debit","transactionType":"sale","volume":2100.00,"count":21,"rate":0.05,"interchangeFee":1.05,"schemeFee":2.10,"acquirerFee":6.30,"totalFee":9.45,"netAmount":2090.55},
+    {"date":"2025-07-12","cardType":"mastercard","transactionType":"refund","volume":-150.00,"count":2,"rate":0.30,"interchangeFee":-0.45,"schemeFee":-0.15,"acquirerFee":-0.45,"totalFee":-1.05,"netAmount":-148.95},
+    {"date":"2025-07-15","cardType":"visa","transactionType":"sale","volume":1875.00,"count":15,"rate":0.20,"interchangeFee":3.75,"schemeFee":1.88,"acquirerFee":5.63,"totalFee":11.26,"netAmount":1863.74}
+  ]
+}
