@@ -4,7 +4,7 @@ import { z } from 'zod';
 
 var Envelope = z.object({
   meta: z.object({
-    type: z.enum(["merchant-statement", "bank-csv", "esb-meter"]),
+    type: z.string().describe("document class \u2014 built-ins: merchant-statement, bank-csv, esb-meter; extensible via registerParser"),
     source: z.string().describe("filename or provenance"),
     parsedAt: z.string().describe("ISO datetime"),
     confidence: z.enum(["high", "medium", "low"]).default("high"),

@@ -6,7 +6,7 @@ var zod = require('zod');
 
 var Envelope = zod.z.object({
   meta: zod.z.object({
-    type: zod.z.enum(["merchant-statement", "bank-csv", "esb-meter"]),
+    type: zod.z.string().describe("document class \u2014 built-ins: merchant-statement, bank-csv, esb-meter; extensible via registerParser"),
     source: zod.z.string().describe("filename or provenance"),
     parsedAt: zod.z.string().describe("ISO datetime"),
     confidence: zod.z.enum(["high", "medium", "low"]).default("high"),

@@ -91,7 +91,7 @@ function wrapEnvelope(type, source, payload, parserVersion, confidence = "high")
 }
 var Envelope = zod.z.object({
   meta: zod.z.object({
-    type: zod.z.enum(["merchant-statement", "bank-csv", "esb-meter"]),
+    type: zod.z.string().describe("document class \u2014 built-ins: merchant-statement, bank-csv, esb-meter; extensible via registerParser"),
     source: zod.z.string().describe("filename or provenance"),
     parsedAt: zod.z.string().describe("ISO datetime"),
     confidence: zod.z.enum(["high", "medium", "low"]).default("high"),
@@ -184,7 +184,7 @@ function parseMerchantStatement(content, _source) {
   const lineItems = [];
   for (const line of lines) {
     const match = line.match(
-      /^(\d{4}-\d{2}-\d{2})\s+([\w-]+)\s+(\w+)\s+([\d,.]+)\s+(\d+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)$/
+      /^(\d{4}-\d{2}-\d{2})\s+([\w-]+)\s+(\w+)\s+(-?[\d,.]+)\s+(\d+)\s+([\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)$/
     );
     if (match) {
       const [

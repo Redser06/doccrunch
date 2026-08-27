@@ -2,20 +2,20 @@ import { z } from 'zod';
 
 declare const Envelope: z.ZodObject<{
     meta: z.ZodObject<{
-        type: z.ZodEnum<["merchant-statement", "bank-csv", "esb-meter"]>;
+        type: z.ZodString;
         source: z.ZodString;
         parsedAt: z.ZodString;
         confidence: z.ZodDefault<z.ZodEnum<["high", "medium", "low"]>>;
         parserVersion: z.ZodString;
     }, "strip", z.ZodTypeAny, {
         source: string;
-        type: "merchant-statement" | "bank-csv" | "esb-meter";
+        type: string;
         parsedAt: string;
         confidence: "high" | "medium" | "low";
         parserVersion: string;
     }, {
         source: string;
-        type: "merchant-statement" | "bank-csv" | "esb-meter";
+        type: string;
         parsedAt: string;
         parserVersion: string;
         confidence?: "high" | "medium" | "low" | undefined;
@@ -24,7 +24,7 @@ declare const Envelope: z.ZodObject<{
 }, "strip", z.ZodTypeAny, {
     meta: {
         source: string;
-        type: "merchant-statement" | "bank-csv" | "esb-meter";
+        type: string;
         parsedAt: string;
         confidence: "high" | "medium" | "low";
         parserVersion: string;
@@ -33,7 +33,7 @@ declare const Envelope: z.ZodObject<{
 }, {
     meta: {
         source: string;
-        type: "merchant-statement" | "bank-csv" | "esb-meter";
+        type: string;
         parsedAt: string;
         parserVersion: string;
         confidence?: "high" | "medium" | "low" | undefined;

@@ -92,7 +92,7 @@ function parseMerchantStatement(content, _source) {
   const lineItems = [];
   for (const line of lines) {
     const match = line.match(
-      /^(\d{4}-\d{2}-\d{2})\s+([\w-]+)\s+(\w+)\s+([\d,.]+)\s+(\d+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)$/
+      /^(\d{4}-\d{2}-\d{2})\s+([\w-]+)\s+(\w+)\s+(-?[\d,.]+)\s+(\d+)\s+([\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)$/
     );
     if (match) {
       const [
