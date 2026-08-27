@@ -1,0 +1,65 @@
+{
+  "name": "doccrunch",
+  "version": "0.1.0",
+  "description": "Document ingestion engine: any doc → normalized JSON",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "doccrunch": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./core": {
+      "import": "./dist/core.js",
+      "require": "./dist/core.cjs",
+      "types": "./dist/core.d.ts"
+    },
+    "./parsers/merchant-statement": {
+      "import": "./dist/parsers-merchant-statement.js",
+      "require": "./dist/parsers-merchant-statement.cjs",
+      "types": "./dist/parsers-merchant-statement.d.ts"
+    },
+    "./parsers/bank-csv": {
+      "import": "./dist/parsers-bank-csv.js",
+      "require": "./dist/parsers-bank-csv.cjs",
+      "types": "./dist/parsers-bank-csv.d.ts"
+    },
+    "./parsers/esb-meter": {
+      "import": "./dist/parsers-esb-meter.js",
+      "require": "./dist/parsers-esb-meter.cjs",
+      "types": "./dist/parsers-esb-meter.d.ts"
+    },
+    "./schemas": {
+      "import": "./dist/schemas.js",
+      "require": "./dist/schemas.cjs",
+      "types": "./dist/schemas.d.ts"
+    }
+  },
+  "scripts": {
+    "dev": "tsx src/cli.ts",
+    "build": "tsup",
+    "test": "vitest run",
+    "demo": "tsx scripts/show-demo.ts"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "csv-parse": "^5.6.0",
+    "unpdf": "^0.12.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}

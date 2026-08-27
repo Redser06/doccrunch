@@ -1,0 +1,16 @@
+{
+  "currency": "EUR",
+  "rows": [
+    {"date":"2025-07-01","description":"Salary ACME Corp","amount":3520.11,"balance":3520.11},
+    {"date":"2025-07-02","description":"Tesco Superstore","amount":-84.23,"balance":3435.88},
+    {"date":"2025-07-03","description":"Electric Ireland","amount":-120.40,"balance":3315.48},
+    {"date":"2025-07-05","description":"Netflix","amount":-12.99,"balance":3302.49},
+    {"date":"2025-07-06","description":"ATM Withdrawal","amount":-60.00,"balance":3242.49},
+    {"date":"2025-07-08","description":"Transfer from Savings","amount":500.00,"balance":3742.49},
+    {"date":"2025-07-10","description":"AIB Mortgage","amount":-980.50,"balance":2761.99},
+    {"date":"2025-07-12","description":"Spotify","amount":-9.99,"balance":2752.00},
+    {"date":"2025-07-15","description":"Coffee Roasters Ltd","amount":-6.50,"balance":2745.50},
+    {"date":"2025-07-20","description":"Refund Amazon","amount":45.00,"balance":2790.50}
+  ],
+  "summary": {"totalIn":4065.11,"totalOut":1274.61,"net":2790.50}
+}

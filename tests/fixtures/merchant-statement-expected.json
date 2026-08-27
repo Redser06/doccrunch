@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "provider": "elavon",
+    "statementPeriodStart": "2024-01-01",
+    "statementPeriodEnd": "2024-01-31",
+    "merchantId": "ELA-1234567",
+    "merchantName": "Test Merchant Ltd",
+    "currency": "EUR",
+    "generatedAt": "2024-02-15 10:30"
+  },
+  "summary": {
+    "totalVolume": 17200.00,
+    "totalCount": 52,
+    "totalInterchange": 190.60,
+    "totalSchemeFees": 34.40,
+    "totalAcquirerFees": 17.20,
+    "totalFees": 242.20,
+    "netSettlement": 16957.80
+  },
+  "lineItems": [
+    {
+      "date": "2024-01-05",
+      "cardType": "visa",
+      "transactionType": "sale",
+      "volume": 5000.00,
+      "count": 15,
+      "rate": 0.0180,
+      "interchangeFee": 54.00,
+      "schemeFee": 10.00,
+      "acquirerFee": 5.00,
+      "totalFee": 69.00,
+      "netAmount": 4931.00
+    },
+    {
+      "date": "2024-01-08",
+      "cardType": "mastercard",
+      "transactionType": "sale",
+      "volume": 3200.00,
+      "count": 8,
+      "rate": 0.0200,
+      "interchangeFee": 40.00,
+      "schemeFee": 6.40,
+      "acquirerFee": 3.20,
+      "totalFee": 49.60,
+      "netAmount": 3150.40
+    },
+    {
+      "date": "2024-01-12",
+      "cardType": "amex",
+      "transactionType": "sale",
+      "volume": 1500.00,
+      "count": 3,
+      "rate": 0.0250,
+      "interchangeFee": 20.00,
+      "schemeFee": 3.00,
+      "acquirerFee": 1.50,
+      "totalFee": 24.50,
+      "netAmount": 1475.50
+    },
+    {
+      "date": "2024-01-15",
+      "cardType": "visa-debit",
+      "transactionType": "sale",
+      "volume": 2200.00,
+      "count": 10,
+      "rate": 0.0150,
+      "interchangeFee": 18.00,
+      "schemeFee": 4.40,
+      "acquirerFee": 2.20,
+      "totalFee": 24.60,
+      "netAmount": 2175.40
+    },
+    {
+      "date": "2024-01-20",
+      "cardType": "mastercard",
+      "transactionType": "refund",
+      "volume": 800.00,
+      "count": 2,
+      "rate": 0.0200,
+      "interchangeFee": 10.00,
+      "schemeFee": 1.60,
+      "acquirerFee": 0.80,
+      "totalFee": 12.40,
+      "netAmount": 787.60
+    },
+    {
+      "date": "2024-01-25",
+      "cardType": "visa",
+      "transactionType": "sale",
+      "volume": 4500.00,
+      "count": 14,
+      "rate": 0.0180,
+      "interchangeFee": 48.60,
+      "schemeFee": 9.00,
+      "acquirerFee": 4.50,
+      "totalFee": 62.10,
+      "netAmount": 4437.90
+    }
+  ]
+}
