@@ -1,100 +1,28 @@
 {
   "meta": {
     "provider": "elavon",
-    "statementPeriodStart": "2024-01-01",
-    "statementPeriodEnd": "2024-01-31",
-    "merchantId": "ELA-1234567",
-    "merchantName": "Test Merchant Ltd",
+    "statementPeriodStart": "2025-07-01",
+    "statementPeriodEnd": "2025-07-31",
+    "merchantId": "1234567890",
+    "merchantName": "Test Cafe Ltd",
     "currency": "EUR",
-    "generatedAt": "2024-02-15 10:30"
+    "generatedAt": "2025-08-01 09:30"
   },
   "summary": {
-    "totalVolume": 17200.00,
-    "totalCount": 52,
-    "totalInterchange": 190.60,
-    "totalSchemeFees": 34.40,
-    "totalAcquirerFees": 17.20,
-    "totalFees": 242.20,
-    "netSettlement": 16957.80
+    "totalVolume": 6525.00,
+    "totalCount": 63,
+    "totalInterchange": 17.92,
+    "totalSchemeFees": 6.53,
+    "totalAcquirerFees": 20.70,
+    "totalFees": 45.15,
+    "netSettlement": 6479.85
   },
   "lineItems": [
-    {
-      "date": "2024-01-05",
-      "cardType": "visa",
-      "transactionType": "sale",
-      "volume": 5000.00,
-      "count": 15,
-      "rate": 0.0180,
-      "interchangeFee": 54.00,
-      "schemeFee": 10.00,
-      "acquirerFee": 5.00,
-      "totalFee": 69.00,
-      "netAmount": 4931.00
-    },
-    {
-      "date": "2024-01-08",
-      "cardType": "mastercard",
-      "transactionType": "sale",
-      "volume": 3200.00,
-      "count": 8,
-      "rate": 0.0200,
-      "interchangeFee": 40.00,
-      "schemeFee": 6.40,
-      "acquirerFee": 3.20,
-      "totalFee": 49.60,
-      "netAmount": 3150.40
-    },
-    {
-      "date": "2024-01-12",
-      "cardType": "amex",
-      "transactionType": "sale",
-      "volume": 1500.00,
-      "count": 3,
-      "rate": 0.0250,
-      "interchangeFee": 20.00,
-      "schemeFee": 3.00,
-      "acquirerFee": 1.50,
-      "totalFee": 24.50,
-      "netAmount": 1475.50
-    },
-    {
-      "date": "2024-01-15",
-      "cardType": "visa-debit",
-      "transactionType": "sale",
-      "volume": 2200.00,
-      "count": 10,
-      "rate": 0.0150,
-      "interchangeFee": 18.00,
-      "schemeFee": 4.40,
-      "acquirerFee": 2.20,
-      "totalFee": 24.60,
-      "netAmount": 2175.40
-    },
-    {
-      "date": "2024-01-20",
-      "cardType": "mastercard",
-      "transactionType": "refund",
-      "volume": 800.00,
-      "count": 2,
-      "rate": 0.0200,
-      "interchangeFee": 10.00,
-      "schemeFee": 1.60,
-      "acquirerFee": 0.80,
-      "totalFee": 12.40,
-      "netAmount": 787.60
-    },
-    {
-      "date": "2024-01-25",
-      "cardType": "visa",
-      "transactionType": "sale",
-      "volume": 4500.00,
-      "count": 14,
-      "rate": 0.0180,
-      "interchangeFee": 48.60,
-      "schemeFee": 9.00,
-      "acquirerFee": 4.50,
-      "totalFee": 62.10,
-      "netAmount": 4437.90
-    }
+    {"date":"2025-07-03","cardType":"visa","transactionType":"sale","volume":1250.00,"count":12,"rate":0.20,"interchangeFee":2.50,"schemeFee":1.25,"acquirerFee":3.75,"totalFee":7.50,"netAmount":1242.50},
+    {"date":"2025-07-05","cardType":"mastercard","transactionType":"sale","volume":890.00,"count":8,"rate":0.30,"interchangeFee":2.67,"schemeFee":0.89,"acquirerFee":2.67,"totalFee":6.23,"netAmount":883.77},
+    {"date":"2025-07-08","cardType":"amex","transactionType":"sale","volume":560.00,"count":5,"rate":1.50,"interchangeFee":8.40,"schemeFee":0.56,"acquirerFee":2.80,"totalFee":11.76,"netAmount":548.24},
+    {"date":"2025-07-10","cardType":"visa-debit","transactionType":"sale","volume":2100.00,"count":21,"rate":0.05,"interchangeFee":1.05,"schemeFee":2.10,"acquirerFee":6.30,"totalFee":9.45,"netAmount":2090.55},
+    {"date":"2025-07-12","cardType":"mastercard","transactionType":"refund","volume":-150.00,"count":2,"rate":0.30,"interchangeFee":-0.45,"schemeFee":-0.15,"acquirerFee":-0.45,"totalFee":-1.05,"netAmount":-148.95},
+    {"date":"2025-07-15","cardType":"visa","transactionType":"sale","volume":1875.00,"count":15,"rate":0.20,"interchangeFee":3.75,"schemeFee":1.88,"acquirerFee":5.63,"totalFee":11.26,"netAmount":1863.74}
   ]
 }

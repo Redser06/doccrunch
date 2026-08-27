@@ -59,7 +59,7 @@ function parseMerchantStatement(content: string, _source?: string): Promise<unkn
   for (const line of lines) {
     // Try to match a data line: date cardType txnType volume count rate interchange scheme acquirer totalFee netAmount
     const match = line.match(
-      /^(\d{4}-\d{2}-\d{2})\s+([\w-]+)\s+(\w+)\s+([\d,.]+)\s+(\d+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)$/,
+      /^(\d{4}-\d{2}-\d{2})\s+([\w-]+)\s+(\w+)\s+(-?[\d,.]+)\s+(\d+)\s+([\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)$/,
     );
     if (match) {
       const [

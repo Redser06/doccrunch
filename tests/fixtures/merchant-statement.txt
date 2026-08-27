@@ -1,14 +1,27 @@
-Elavon Merchant Statement
-Merchant Name: Test Merchant Ltd
-Merchant ID: ELA-1234567
-Statement Period: 2024-01-01 to 2024-01-31
-Generated At: 2024-02-15 10:30
-Currency: EUR
+ELAVON MERCHANT SERVICES
+Merchant Statement
 
-Date       CardType      TxnType   Volume     Count  Rate     Interchange  SchemeFee  AcquirerFee  TotalFee  NetAmount
-2024-01-05 Visa          Sale      5000.00    15     0.0180   54.00        10.00      5.00         69.00     4931.00
-2024-01-08 Mastercard    Sale      3200.00    8      0.0200   40.00        6.40       3.20         49.60     3150.40
-2024-01-12 AMEX          Sale      1500.00    3      0.0250   20.00        3.00       1.50         24.50     1475.50
-2024-01-15 Visa-Debit    Sale      2200.00    10     0.0150   18.00        4.40       2.20         24.60     2175.40
-2024-01-20 Mastercard    Refund    800.00     2      0.0200   10.00        1.60       0.80         12.40     787.60
-2024-01-25 Visa          Sale      4500.00    14     0.0180   48.60        9.00       4.50         62.10     4437.90
+Merchant ID:    1234567890
+Merchant Name:  Test Cafe Ltd
+Statement Period: 2025-07-01 - 2025-07-31
+
+TRANSACTION DETAILS
+
+Date        Card Type       Type      Volume      Count  Rate     Interchange  Scheme Fee  Acquirer Fee  Total Fee   Net Amount
+2025-07-03  Visa            Sale      1250.00     12     0.20     2.50         1.25        3.75          7.50        1242.50
+2025-07-05  Mastercard      Sale      890.00      8      0.30     2.67         0.89        2.67          6.23        883.77
+2025-07-08  AMEX            Sale      560.00      5      1.50     8.40         0.56        2.80          11.76       548.24
+2025-07-10  Visa-Debit      Sale      2100.00     21     0.05     1.05         2.10        6.30          9.45        2090.55
+2025-07-12  Mastercard      Refund    -150.00     2      0.30     -0.45        -0.15       -0.45         -1.05       -148.95
+2025-07-15  Visa            Sale      1875.00     15     0.20     3.75         1.88        5.63          11.26       1863.74
+
+SUMMARY
+Total Volume:           6525.00
+Total Count:            63
+Total Interchange:      17.92
+Total Scheme Fees:      6.53
+Total Acquirer Fees:    20.70
+Total Fees:             45.15
+Net Settlement:         6479.85
+
+Generated at: 2025-08-01 09:30
