@@ -1,0 +1,33 @@
+{
+  "note": "Four fields in the bake-off spec's expected JSON do not reconcile with the fixture rows the spec supplies. DocCrunch computes the arithmetically correct values and flags the difference here rather than hardcoding the spec's numbers. Every other field matches the spec exactly.",
+  "discrepancies": [
+    {
+      "fixture": "bank-expected.json",
+      "path": "summary.totalOut",
+      "specValue": 1334.61,
+      "arithmeticValue": 1274.61,
+      "evidence": "Debits in bank.csv: 84.23 + 120.40 + 12.99 + 60.00 + 980.50 + 9.99 + 6.50 = 1274.61. The spec's figure is 60.00 too high."
+    },
+    {
+      "fixture": "bank-expected.json",
+      "path": "summary.net",
+      "specValue": 2730.5,
+      "arithmeticValue": 2790.5,
+      "evidence": "totalIn 4065.11 - totalOut 1274.61 = 2790.50, which is also the closing figure in the fixture's own Balance column (2790.50). The spec's net inherits the 60.00 error from totalOut."
+    },
+    {
+      "fixture": "esb-expected.json",
+      "path": "summary.totalImport_kwh",
+      "specValue": 13.05,
+      "arithmeticValue": 13.71,
+      "evidence": "Sum of the 48 Import_kWh values in esb.csv is 13.71."
+    },
+    {
+      "fixture": "esb-expected.json",
+      "path": "summary.totalExport_kwh",
+      "specValue": 4.72,
+      "arithmeticValue": 6.29,
+      "evidence": "Sum of the 48 Export_kWh values in esb.csv is 6.29."
+    }
+  ]
+}

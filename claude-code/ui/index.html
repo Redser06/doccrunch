@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DocCrunch — verification</title>
+<style>
+  :root {
+    --bg: #0e1116; --panel: #161b22; --panel-2: #1c232c; --line: #2a323d;
+    --text: #e6edf3; --dim: #8b98a5; --accent: #4a9eff;
+    --ok: #3fb950; --warn: #d29922; --bad: #f85149; --grey: #6e7681;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  header {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    padding: 14px 20px; border-bottom: 1px solid var(--line); background: var(--panel);
+    position: sticky; top: 0; z-index: 5;
+  }
+  h1 { font-size: 15px; margin: 0; letter-spacing: .2px; }
+  h1 span { color: var(--dim); font-weight: 400; margin-left: 8px; }
+  .pills { display: flex; gap: 8px; margin-left: auto; flex-wrap: wrap; }
+  .pill {
+    display: flex; align-items: center; gap: 7px; font-size: 12px;
+    padding: 5px 11px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel-2);
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--grey); flex: none; }
+  .dot.ok { background: var(--ok); } .dot.bad { background: var(--bad); } .dot.warn { background: var(--warn); }
+  button {
+    font: inherit; font-size: 13px; color: var(--text); background: var(--panel-2);
+    border: 1px solid var(--line); border-radius: 6px; padding: 7px 13px; cursor: pointer;
+  }
+  button:hover { border-color: var(--accent); }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #06121f; font-weight: 600; }
+  button.primary:hover { filter: brightness(1.1); }
+  main { display: grid; grid-template-columns: minmax(340px, 2fr) 3fr; gap: 1px; background: var(--line); min-height: calc(100vh - 59px); }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  section { background: var(--bg); padding: 18px 20px; min-width: 0; }
+  h2 { font-size: 11px; text-transform: uppercase; letter-spacing: .09em; color: var(--dim); margin: 0 0 10px; font-weight: 600; }
+  .sources { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .source {
+    text-align: left; display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    padding: 9px 12px; border-radius: 7px;
+  }
+  .source[aria-pressed="true"] { border-color: var(--accent); background: #12243a; }
+  .source small { color: var(--dim); font-size: 11.5px; }
+  .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+  select {
+    font: inherit; font-size: 13px; color: var(--text); background: var(--panel-2);
+    border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px;
+  }
+  textarea {
+    width: 100%; height: 300px; resize: vertical; padding: 12px; tab-size: 4;
+    font-family: var(--mono); font-size: 12px; line-height: 1.6; white-space: pre; overflow-wrap: normal;
+    color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+  }
+  textarea:focus, select:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .drop { border-color: var(--accent); }
+  .badge { font-size: 11.5px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel-2); color: var(--dim); }
+  .badge.ok { color: var(--ok); border-color: #1e4429; } .badge.bad { color: var(--bad); border-color: #4a2020; }
+  .badge.warn { color: var(--warn); border-color: #4a3c14; }
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
+  .tab { border: none; background: none; border-bottom: 2px solid transparent; border-radius: 0; padding: 8px 12px; color: var(--dim); }
+  .tab[aria-selected="true"] { color: var(--text); border-bottom-color: var(--accent); }
+  .tab:hover { border-color: transparent; border-bottom-color: var(--line); color: var(--text); }
+  .note {
+    border: 1px solid #4a3c14; background: #241d08; color: #e8d9a8;
+    border-radius: 8px; padding: 11px 13px; font-size: 12.5px; margin-bottom: 14px;
+  }
+  .note b { color: #ffd970; }
+  .note.err { border-color: #4a2020; background: #2a1213; color: #ffc9c4; }
+  .note.err b { color: #ff8a80; }
+  .note pre { background: none; border: none; padding: 8px 0 0; max-height: none; white-space: pre-wrap; word-break: break-word; }
+  table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 12px; }
+  th { text-align: left; color: var(--dim); font-weight: 600; padding: 7px 10px; border-bottom: 1px solid var(--line); position: sticky; top: 59px; background: var(--bg); }
+  td { padding: 6px 10px; border-bottom: 1px solid #1e242c; vertical-align: top; word-break: break-word; }
+  tr.mismatch td, tr.missing td, tr.extra td { background: #2a1213; }
+  tr.known td { background: #241d08; }
+  .st { font-weight: 600; white-space: nowrap; }
+  .st.match { color: var(--ok); } .st.mismatch, .st.missing, .st.extra { color: var(--bad); }
+  .st.known { color: var(--warn); } .st.dynamic { color: var(--grey); }
+  .evidence { color: #c9b681; font-size: 11.5px; font-family: inherit; padding-top: 3px; }
+  pre { font-family: var(--mono); font-size: 12px; line-height: 1.55; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px; overflow: auto; max-height: 68vh; margin: 0; }
+  .k { color: #7ee2b8; } .s { color: #ffab70; } .n { color: #79c0ff; } .b { color: #d2a8ff; }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; color: var(--dim); font-size: 11.5px; margin: 10px 0 0; }
+  label.check { display: flex; align-items: center; gap: 6px; color: var(--dim); font-size: 12.5px; cursor: pointer; }
+  .empty { color: var(--dim); font-size: 13px; padding: 30px 0; text-align: center; }
+</style>
+</head>
+<body>
+<header>
+  <h1>DocCrunch <span>verification console</span></h1>
+  <button id="runAll" class="primary">Run all checks</button>
+  <div class="pills" id="pills"></div>
+</header>
+
+<main>
+  <section>
+    <h2>Document</h2>
+    <div class="sources" id="sources"></div>
+
+    <div class="row">
+      <select id="typeSelect" title="Force a document class instead of sniffing the content"></select>
+      <span class="badge" id="detectBadge">detected: —</span>
+      <button id="parseBtn" class="primary">Parse</button>
+    </div>
+
+    <textarea id="input" spellcheck="false" aria-label="Document content"
+      placeholder="Paste document content here, or drop a .txt/.csv file…"></textarea>
+    <p class="legend">Editable — change a value and re-parse to see how the engine reacts.</p>
+  </section>
+
+  <section>
+    <div class="tabs" role="tablist">
+      <button class="tab" id="tab-diff" role="tab" aria-selected="true" aria-controls="panel-diff">Field-by-field</button>
+      <button class="tab" id="tab-json" role="tab" aria-selected="false" aria-controls="panel-json">Envelope JSON</button>
+    </div>
+    <div id="panel-diff" role="tabpanel"></div>
+    <div id="panel-json" role="tabpanel" hidden></div>
+  </section>
+</main>
+
+<script type="module">
+const $ = (id) => document.getElementById(id);
+const state = { fixtures: [], types: [], discrepancies: null, active: null, result: null, onlyDiff: false, tab: 'diff' };
+
+const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+const fmt = (v) => v === undefined ? '—' : typeof v === 'string' ? `"${v}"` : JSON.stringify(v);
+
+function highlight(obj) {
+  return esc(JSON.stringify(obj, null, 2))
+    .replace(/&quot;([^&]*?)&quot;(\s*:)/g, '<span class="k">"$1"</span>$2')
+    .replace(/:\s&quot;(.*?)&quot;/g, ': <span class="s">"$1"</span>')
+    .replace(/:\s(-?\d+\.?\d*)/g, ': <span class="n">$1</span>')
+    .replace(/:\s(true|false|null)/g, ': <span class="b">$1</span>');
+}
+
+async function bootstrap() {
+  const data = await (await fetch('/api/bootstrap')).json();
+  Object.assign(state, data);
+
+  $('sources').innerHTML = state.fixtures.map((f) => `
+    <button class="source" data-id="${f.id}" aria-pressed="false">
+      <span>${esc(f.label)}<br><small>${esc(f.sub)} · ${esc(f.file)}</small></span>
+      <span class="badge">${esc(f.id)}</span>
+    </button>`).join('') + `
+    <button class="source" data-id="__custom" aria-pressed="false">
+      <span>Your own document<br><small>paste or drop a file — no expected JSON to diff against</small></span>
+      <span class="badge">custom</span>
+    </button>`;
+
+  $('typeSelect').innerHTML =
+    '<option value="">Auto-detect</option>' +
+    state.types.map((t) => `<option value="${esc(t)}">force: ${esc(t)}</option>`).join('');
+
+  for (const btn of document.querySelectorAll('.source')) {
+    btn.addEventListener('click', () => selectSource(btn.dataset.id));
+  }
+  selectSource(state.fixtures[0].id);
+  runAll();
+}
+
+function selectSource(id) {
+  state.active = id === '__custom' ? null : state.fixtures.find((f) => f.id === id) ?? null;
+  for (const btn of document.querySelectorAll('.source')) {
+    btn.setAttribute('aria-pressed', String(btn.dataset.id === id));
+  }
+  $('input').value = state.active ? state.active.content : '';
+  $('typeSelect').value = '';
+  parse();
+}
+
+async function parse() {
+  const text = $('input').value;
+  if (!text.trim()) {
+    state.result = null;
+    $('detectBadge').textContent = 'detected: —';
+    $('detectBadge').className = 'badge';
+    return render();
+  }
+  const res = await fetch('/api/parse', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      text,
+      type: $('typeSelect').value || undefined,
+      source: state.active ? state.active.file : '<pasted>',
+      expectedFile: state.active ? state.active.expectedFile : undefined,
+    }),
+  });
+  state.result = await res.json();
+
+  const badge = $('detectBadge');
+  badge.textContent = `detected: ${state.result.detected ?? 'none'}`;
+  badge.className = 'badge ' + (state.result.detected ? 'ok' : 'bad');
+  render();
+}
+
+async function runAll() {
+  const { results } = await (await fetch('/api/verify')).json();
+  $('pills').innerHTML = results.map((r) => {
+    const known = r.counts?.['known-spec-error'] ?? 0;
+    const cls = !r.pass ? 'bad' : known ? 'warn' : 'ok';
+    const label = !r.pass ? 'FAIL' : known ? `${known} known spec error${known > 1 ? 's' : ''}` : 'all fields match';
+    return `<span class="pill"><span class="dot ${cls}"></span>${esc(r.label)}: ${esc(label)}</span>`;
+  }).join('');
+}
+
+function render() {
+  const diff = $('panel-diff');
+  const jsonPanel = $('panel-json');
+  const r = state.result;
+
+  if (!r) {
+    diff.innerHTML = '<p class="empty">Pick a document on the left, or paste your own.</p>';
+    jsonPanel.innerHTML = '';
+    return;
+  }
+
+  if (!r.ok) {
+    const html = `<div class="note err"><b>${esc(r.errorName)}</b><br><pre>${esc(r.error)}</pre></div>`;
+    diff.innerHTML = html;
+    jsonPanel.innerHTML = html;
+    return;
+  }
+
+  jsonPanel.innerHTML = `<pre>${highlight(r.envelope)}</pre>`;
+
+  const warnings = r.envelope.warnings ?? [];
+  const meta = r.envelope.meta;
+  let head = `<div class="row">
+    <span class="badge ${meta.confidence === 'high' ? 'ok' : 'warn'}">confidence: ${esc(meta.confidence)}</span>
+    <span class="badge">${esc(meta.parserVersion)}</span>
+    <span class="badge">source: ${esc(meta.source)}</span>
+  </div>`;
+  if (warnings.length) {
+    head += `<div class="note"><b>Parser warnings</b><br>${warnings.map(esc).join('<br>')}</div>`;
+  }
+
+  if (!r.diff) {
+    diff.innerHTML = head + '<p class="empty">No expected JSON for this document — see the Envelope JSON tab.</p>';
+    return;
+  }
+
+  const { fields, counts, pass } = r.diff;
+  const known = counts['known-spec-error'] ?? 0;
+  head += `<div class="row">
+    <span class="badge ${pass ? 'ok' : 'bad'}">${pass ? 'PASS' : 'FAIL'}</span>
+    <span class="badge ok">${counts.match ?? 0} match</span>
+    ${counts.mismatch ? `<span class="badge bad">${counts.mismatch} mismatch</span>` : ''}
+    ${counts.missing ? `<span class="badge bad">${counts.missing} missing</span>` : ''}
+    ${counts.extra ? `<span class="badge bad">${counts.extra} unexpected</span>` : ''}
+    ${known ? `<span class="badge warn">${known} known spec error${known > 1 ? 's' : ''}</span>` : ''}
+    ${counts.dynamic ? `<span class="badge">${counts.dynamic} dynamic</span>` : ''}
+    <label class="check"><input type="checkbox" id="onlyDiff" ${state.onlyDiff ? 'checked' : ''}> only show non-matching</label>
+  </div>`;
+
+  if (known) {
+    head += `<div class="note"><b>${known} field${known > 1 ? 's differ' : ' differs'} from the spec's expected JSON — deliberately.</b><br>
+      ${esc(state.discrepancies.note)}</div>`;
+  }
+
+  const rows = fields
+    .filter((f) => !state.onlyDiff || f.status !== 'match')
+    .map((f) => {
+      const cls = f.status === 'known-spec-error' ? 'known' : f.status;
+      const st = f.status === 'known-spec-error' ? 'known' : f.status;
+      return `<tr class="${cls}">
+        <td>${esc(f.path)}</td>
+        <td>${esc(fmt(f.expected))}</td>
+        <td>${esc(fmt(f.actual))}</td>
+        <td class="st ${st}">${esc(f.status)}</td>
+      </tr>` + (f.note && f.status === 'known-spec-error'
+        ? `<tr class="known"><td colspan="4" class="evidence">${esc(f.note)}</td></tr>` : '');
+    }).join('');
+
+  diff.innerHTML = head + `<table>
+    <thead><tr><th style="width:34%">field</th><th style="width:22%">spec expects</th><th style="width:22%">DocCrunch produced</th><th>status</th></tr></thead>
+    <tbody>${rows || '<tr><td colspan="4" class="empty">Every field matches.</td></tr>'}</tbody>
+  </table>
+  <p class="legend">
+    <span><span class="st match">match</span> identical</span>
+    <span><span class="st known">known</span> spec's own arithmetic is wrong — evidence shown inline</span>
+    <span><span class="st mismatch">mismatch</span> real difference</span>
+    <span><span class="st dynamic">dynamic</span> timestamps, not compared</span>
+  </p>`;
+
+  const only = $('onlyDiff');
+  if (only) only.addEventListener('change', (e) => { state.onlyDiff = e.target.checked; render(); });
+}
+
+function selectTab(name) {
+  state.tab = name;
+  for (const t of ['diff', 'json']) {
+    $(`tab-${t}`).setAttribute('aria-selected', String(t === name));
+    $(`panel-${t}`).hidden = t !== name;
+  }
+}
+
+$('tab-diff').addEventListener('click', () => selectTab('diff'));
+$('tab-json').addEventListener('click', () => selectTab('json'));
+$('parseBtn').addEventListener('click', parse);
+$('runAll').addEventListener('click', runAll);
+$('typeSelect').addEventListener('change', parse);
+$('input').addEventListener('keydown', (e) => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') parse();
+});
+
+const input = $('input');
+input.addEventListener('dragover', (e) => { e.preventDefault(); input.classList.add('drop'); });
+input.addEventListener('dragleave', () => input.classList.remove('drop'));
+input.addEventListener('drop', async (e) => {
+  e.preventDefault();
+  input.classList.remove('drop');
+  const file = e.dataTransfer?.files?.[0];
+  if (!file) return;
+  selectSource('__custom');
+  input.value = await file.text();
+  parse();
+});
+
+bootstrap();
+</script>
+</body>
+</html>

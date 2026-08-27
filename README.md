@@ -12,6 +12,9 @@ This is a **bake-off repo** — multiple independent builder implementations of 
 |---|---|---|
 | [`Berd-Kimi/`](./Berd-Kimi) | Berd · glm-5.2 (Product Guru persona) | ✅ Phase 0–2 complete |
 | [`antigravity/`](./antigravity) | Antigravity | ✅ P0–2 (incl. UI serve script) |
+| [`claude-code/`](./claude-code) | Claude Code · Opus 5 | ✅ P0–1 + manual-verification UI (49 tests) |
+
+> **Fixture note:** four summary values in the spec's expected JSON (`bank.summary.totalOut` / `.net`, `esb.summary.totalImport_kwh` / `.totalExport_kwh`) do not reconcile with the fixture rows the spec supplies. Worth checking how each implementation handles them — see [`claude-code/README.md`](./claude-code/README.md#fixture-arithmetic-four-values-in-the-spec-dont-add-up) for the arithmetic.
 
 > The spec driving these builds is defined by this repo; each builder folder is a self-contained implementation of it. Add new builders as their own subfolders.
 
